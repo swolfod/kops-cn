@@ -1,13 +1,13 @@
 # customize the values below
 TARGET_REGION ?= cn-northwest-1
-AWS_PROFILE ?= default
-KOPS_STATE_STORE ?= s3://pahud-kops-state-store-zhy
-VPCID ?= vpc-bb3e99d2
+AWS_PROFILE ?= ${AWS_PROFILE-default}
+KOPS_STATE_STORE ?= s3://k8s-lushu-state-store
+VPCID ?= vpc-00ccc14a955aeeded
 MASTER_COUNT ?= 3
-MASTER_SIZE ?= m4.large
-NODE_SIZE ?= c5.large
-NODE_COUNT ?= 2
-SSH_PUBLIC_KEY ?= ~/.ssh/id_rsa.pub
+MASTER_SIZE ?= t2.medium
+NODE_SIZE ?= t2.xlarge
+NODE_COUNT ?= 6
+SSH_PUBLIC_KEY ?= ~/.ssh/authorized_keys
 KUBERNETES_VERSION ?= v1.11.9
 KOPS_VERSION ?= 1.11.1
 
@@ -15,14 +15,14 @@ KOPS_VERSION ?= 1.11.1
 AWS_DEFAULT_REGION ?= $(TARGET_REGION)
 AWS_REGION ?= $(AWS_DEFAULT_REGION)
 ifeq ($(TARGET_REGION) ,cn-north-1)
-	CLUSTER_NAME ?= cluster.bjs.k8s.local
-	AMI ?= 	ami-01e99c7e0a343d325
+	CLUSTER_NAME ?= cluster.lushu.bjs.k8s.local
+	AMI ?= 	ami-01bd6c15d7a3e9aaa
 	ZONES ?= cn-north-1a,cn-north-1b
 endif
 
 ifeq ($(TARGET_REGION) ,cn-northwest-1)
-	CLUSTER_NAME ?= cluster.zhy.k8s.local
-	AMI ?= ami-0773341917796083a
+	CLUSTER_NAME ?= cluster.lushu.zhy.k8s.local
+	AMI ?= ami-0f138dd58b4ca3033
 	ZONES ?= cn-northwest-1a,cn-northwest-1b,cn-northwest-1c
 endif
 
