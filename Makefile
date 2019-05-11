@@ -42,8 +42,10 @@ create-cluster:
      --zones=$(ZONES) \
      --master-count=$(MASTER_COUNT) \
      --master-size=$(MASTER_SIZE) \
+     --master-volume-size=32 \
      --node-count=$(NODE_COUNT) \
      --node-size=$(NODE_SIZE)  \
+     --node-volume-size=64 \
      --vpc=$(VPCID) \
      --kubernetes-version=$(KUBERNETES_VERSION_URI) \
      --networking=amazon-vpc-routed-eni \

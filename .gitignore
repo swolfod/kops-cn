@@ -1,1 +1,14 @@
 iam-policy.json
+.DS_Store
+*.DS_Store
+.idea/
+.idea/*
+.fabfile
+__pychache__/
+*.pyc
+media/*
+*.log
+tmp/*
+db.sqlite3
+.vscode
+.history
