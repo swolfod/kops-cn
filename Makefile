@@ -8,8 +8,8 @@ MASTER_SIZE ?= t2.medium
 NODE_SIZE ?= t2.xlarge
 NODE_COUNT ?= 6
 SSH_PUBLIC_KEY ?= ~/.ssh/authorized_keys
-KUBERNETES_VERSION ?= v1.11.9
-KOPS_VERSION ?= 1.11.1
+KUBERNETES_VERSION ?= v1.12.8
+KOPS_VERSION ?= 1.12.1
 
 # do not modify following values
 AWS_DEFAULT_REGION ?= $(TARGET_REGION)
@@ -24,6 +24,10 @@ ifeq ($(TARGET_REGION) ,cn-northwest-1)
 	CLUSTER_NAME ?= cluster.lushu.zhy.k8s.local
 	AMI ?= ami-0f138dd58b4ca3033
 	ZONES ?= cn-northwest-1a,cn-northwest-1b,cn-northwest-1c
+endif
+
+ifdef CUSTOM_CLUSTER_NAME
+	CLUSTER_NAME = $(CUSTOM_CLUSTER_NAME)
 endif
 
 KUBERNETES_VERSION_URI ?= "https://s3.cn-north-1.amazonaws.com.cn/kubernetes-release/release/$(KUBERNETES_VERSION)"
@@ -50,7 +54,7 @@ create-cluster:
      --kubernetes-version=$(KUBERNETES_VERSION_URI) \
      --networking=calico \
      --ssh-public-key=$(SSH_PUBLIC_KEY)
-     
+          
 .PHONY: edit-ig-nodes
 edit-ig-nodes:
 	@KOPS_STATE_STORE=$(KOPS_STATE_STORE) \
