@@ -48,7 +48,7 @@ create-cluster:
      --node-volume-size=64 \
      --vpc=$(VPCID) \
      --kubernetes-version=$(KUBERNETES_VERSION_URI) \
-     --networking=amazon-vpc-routed-eni \
+     --networking=calico \
      --ssh-public-key=$(SSH_PUBLIC_KEY)
      
 .PHONY: edit-ig-nodes
