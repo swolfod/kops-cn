@@ -4,8 +4,8 @@ AWS_PROFILE ?= ${AWS_PROFILE-default}
 KOPS_STATE_STORE ?= s3://k8s-lushu-state-store
 VPCID ?= vpc-00ccc14a955aeeded
 MASTER_COUNT ?= 3
-MASTER_SIZE ?= t2.medium
-NODE_SIZE ?= t2.xlarge
+MASTER_SIZE ?= t3.large
+NODE_SIZE ?= t3.2xlarge
 NODE_COUNT ?= 6
 SSH_PUBLIC_KEY ?= ~/.ssh/authorized_keys
 KUBERNETES_VERSION ?= v1.12.8
@@ -22,7 +22,7 @@ endif
 
 ifeq ($(TARGET_REGION) ,cn-northwest-1)
 	CLUSTER_NAME ?= cluster.lushu.zhy.k8s.local
-	AMI ?= ami-0f138dd58b4ca3033
+	AMI ?= ami-0794a377dbed24459
 	ZONES ?= cn-northwest-1a,cn-northwest-1b,cn-northwest-1c
 endif
 
