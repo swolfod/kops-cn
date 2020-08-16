@@ -1,6 +1,6 @@
 # customize the values below
 TARGET_REGION ?= cn-northwest-1
-AWS_PROFILE ?= ${AWS_PROFILE-default}
+AWS_PROFILE ?= default
 KOPS_STATE_STORE ?= s3://k8s-lushu-state-store
 VPCID ?= vpc-00ccc14a955aeeded
 MASTER_COUNT ?= 3
@@ -8,8 +8,8 @@ MASTER_SIZE ?= t3.large
 NODE_SIZE ?= t3.2xlarge
 NODE_COUNT ?= 6
 SSH_PUBLIC_KEY ?= ~/.ssh/authorized_keys
-KUBERNETES_VERSION ?= v1.12.8
-KOPS_VERSION ?= 1.12.1
+KUBERNETES_VERSION ?= v1.15.10
+KOPS_VERSION ?= 1.15.2
 
 # do not modify following values
 AWS_DEFAULT_REGION ?= $(TARGET_REGION)
@@ -30,7 +30,7 @@ ifdef CUSTOM_CLUSTER_NAME
 	CLUSTER_NAME = $(CUSTOM_CLUSTER_NAME)
 endif
 
-KUBERNETES_VERSION_URI ?= "https://s3.cn-north-1.amazonaws.com.cn/kubernetes-release/release/$(KUBERNETES_VERSION)"
+KUBERNETES_VERSION_URI ?= "https://s3.cn-northwest-1.amazonaws.com.cn/kops-kubernetes-release/release/$(KUBERNETES_VERSION)"
 
 
 .PHONY: create-cluster
@@ -52,6 +52,7 @@ create-cluster:
      --node-volume-size=64 \
      --vpc=$(VPCID) \
      --kubernetes-version=$(KUBERNETES_VERSION_URI) \
+     --networking=amazon-vpc-routed-eni \
      --ssh-public-key=$(SSH_PUBLIC_KEY)
           
 .PHONY: edit-ig-nodes
